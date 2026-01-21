@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+      .skeleton-viewport {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+        padding: 32px 5vw;
+        box-sizing: border-box;
+        background: radial-gradient(120% 120% at 50% 0%, #ffffff 0%, #e7ecf5 70%, #d7deeb 100%);
+      }
+      .skeleton {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(90deg, #edf0f5 25%, #f6f8fb 50%, #edf0f5 75%);
+        background-size: 200% 100%;
+        animation: skeleton-shift 1.5s ease-in-out infinite;
+        border-radius: 16px;
+      }
+      .top-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        width: min(820px, 100%);
+      }
+      .skeleton-logo {
+        width: 64px;
+        height: 64px;
+        border-radius: 20px;
+      }
+      .skeleton-tab {
+        flex: 0 1 120px;
+        height: 22px;
+        border-radius: 12px;
+      }
+      .hero {
+        width: min(820px, 100%);
+        height: clamp(150px, 24vw, 200px);
+        border-radius: 26px;
+      }
+      .content-card {
+        width: min(480px, 100%);
+        padding: 28px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
+        backdrop-filter: blur(14px);
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        text-align: center;
+      }
+      .content-card h1 {
+        margin: 0;
+        font-size: clamp(1.6rem, 3vw, 1.9rem);
+        letter-spacing: -0.04em;
+      }
+      .content-card p {
+        margin: 0;
+        color: #475569;
+        line-height: 1.6;
+      }
+      .widget-shell {
+        height: clamp(120px, 22vw, 140px);
+        border-radius: 18px;
+      }
+      .meta {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .meta-line {
+        height: 18px;
+        border-radius: 12px;
+      }
+      .meta-line.short {
+        width: 40%;
+        align-self: center;
+      }
+      .test-button {
+        margin-top: 12px;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 12px;
+        background: #1d4ed8;
+        color: #ffffff;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      .test-button:hover {
+        background: #1e40af;
+      }
+      .gallery {
+        width: min(820px, 100%);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 18px;
+      }
+      .tile {
+        height: clamp(110px, 18vw, 130px);
+        border-radius: 18px;
+      }
+      @keyframes skeleton-shift {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      @media (max-height: 720px) {
+        .skeleton-viewport {
+          padding: 24px 4vw;
+          gap: 20px;
+        }
+        .top-row {
+          gap: 10px;
+        }
+        .skeleton-logo {
+          width: 56px;
+          height: 56px;
+        }
+        .hero {
+          height: clamp(130px, 22vw, 160px);
+        }
+        .content-card {
+          padding: 24px;
+          gap: 16px;
+        }
+        .widget-shell {
+          height: clamp(100px, 20vw, 120px);
+        }
+        .gallery {
+          gap: 14px;
+        }
+        .tile {
+          height: clamp(90px, 16vw, 110px);
+        }
+      }
+    </style>
+</head>
+<body>
+  <div class="skeleton-viewport">
+    <div class="top-row">
+      <div class="skeleton skeleton-logo"></div>
+      <div class="skeleton skeleton-tab"></div>
+      <div class="skeleton skeleton-tab"></div>
+      <div class="skeleton skeleton-tab"></div>
+    </div>
+    <div class="skeleton hero"></div>
+    <div class="content-card">
+      <h1>Widget Demo</h1>
+      <p>A testing surface to preview the embedded assistant widget experience.</p>
+      <div class="skeleton widget-shell"></div>
+      <div class="meta">
+        <div class="skeleton meta-line short"></div>
+        <div class="skeleton meta-line"></div>
+        <div class="skeleton meta-line"></div>
+      </div>
+      <button type="button" class="test-button" id="clear-storage">Clear local storage</button>
+    </div>
+    <div class="gallery">
+      <div class="skeleton tile"></div>
+      <div class="skeleton tile"></div>
+      <div class="skeleton tile"></div>
+    </div>
+  </div>
+
+<script>
+  (function() {
+    var widget = document.createElement('script');
+    widget.src = 'http://localhost:8080/widget.js';
+    widget.setAttribute('data-assistant-id', '6181e2c1-a95e-49c9-8a04-72f0a42e34b4');
+    widget.async = true;
+    document.body.appendChild(widget);
+  })();
+
+
+    document.getElementById('clear-storage').addEventListener('click', function() {
+    localStorage.clear();
+    console.log('Local storage cleared for testing.');
+    window.location.reload();
+  });
+</script>
+</body>
+</html>
