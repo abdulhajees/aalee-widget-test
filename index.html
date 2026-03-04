@@ -184,13 +184,15 @@
 <script>
 
 
+
   (function() {
     var widget = document.createElement('script');
-    widget.src = 'https://uat-assist.aalee.ai/widget.js';
-    widget.setAttribute('data-assistant-id', '3a84016d-4af4-4a34-9799-87f7e00c72b5');
+    widget.src = 'http://localhost:8001/api/v1/intelligence/service/api/services/widget/widget.js';
+    widget.setAttribute('data-assistant-id', '5879c8f4-ebb2-41a2-b432-2909bad221a2');
     widget.async = true;
     document.body.appendChild(widget);
   })();
+
 
 
     document.getElementById('clear-storage').addEventListener('click', function() {
